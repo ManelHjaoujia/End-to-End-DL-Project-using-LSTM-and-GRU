@@ -5,8 +5,13 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 #Load the LSTM Model
-model=load_model('next_word_lstm.h5')
+model_path = 'next_word_lstm.h5'
 
+if not os.path.exists(model_path):
+    st.error(f"❌ Model file not found at: {model_path}")
+else:
+    model = load_model(model_path)
+    st.success("✅ Model loaded successfully!")
 #3 Laod the tokenizer
 with open('tokenizer.pickle','rb') as handle:
     tokenizer=pickle.load(handle)
